@@ -12,5 +12,11 @@
         android:layout_height="wrap_content"
         android:text="简单播放器" />
 
+    <Button
+        android:id="@+id/bt_opengl_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OpenGL 渲染视频"/>
+
 
 </LinearLayout>

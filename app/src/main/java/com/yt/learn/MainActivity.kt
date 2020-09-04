@@ -29,6 +29,10 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
             R.id.bt_simple_player -> {
                 startActivity(Intent(this,SimplePlayerActivity::class.java))
             }
+            R.id.bt_opengl_player ->{
+                startActivity(Intent(this,
+                    OpenGLPlayerActivity::class.java))
+            }
         }
     }
 }
