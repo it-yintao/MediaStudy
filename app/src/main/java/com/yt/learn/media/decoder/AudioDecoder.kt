@@ -1,9 +1,11 @@
 package com.yt.learn.media.decoder
 
 import android.media.*
+import android.util.Log
 import com.yt.learn.media.BaseDecoder
 import com.yt.learn.media.IExtractor
 import com.yt.learn.media.extractor.AudioExtractor
+import java.lang.Exception
 import java.nio.ByteBuffer
 
 /**
@@ -13,6 +15,7 @@ import java.nio.ByteBuffer
  * 描述：音频解码器
  */
 class AudioDecoder(path:String):BaseDecoder(path) {
+    private val TAG = AudioDecoder::class.simpleName
 
     /*采样率*/
     private var mSampleRate = -1;
@@ -75,7 +78,7 @@ class AudioDecoder(path:String):BaseDecoder(path) {
             channel,//通道
             mPCMEncodeBit,//采样位数
             minBufferSize,//缓冲区大小
-            AudioTrack.MODE_STATIC//播放模式：数据流动态写入（MODE_STREAM，一次性写入）
+            AudioTrack.MODE_STREAM//播放模式：数据流动态写入（MODE_STATIC，一次性写入）这里如果使用一次性写入调用play()会出现错误，这里要全部解码后才能调用play()
         )
         mAudioTrack?.play()
         return true
