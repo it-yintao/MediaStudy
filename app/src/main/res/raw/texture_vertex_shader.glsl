@@ -1,4 +1,3 @@
-#version 120
 attribute vec4 aPosition;
 precision mediump float;
 uniform mat4 uMatrix;

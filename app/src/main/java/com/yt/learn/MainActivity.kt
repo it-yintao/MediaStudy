@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bt_simple_player.setOnClickListener(this)
+        bt_opengl_player.setOnClickListener(this)
         //请求权限
         val perms = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,

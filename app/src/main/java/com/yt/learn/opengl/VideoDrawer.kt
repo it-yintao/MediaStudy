@@ -168,7 +168,7 @@ class VideoDrawer(context: Context) :IDrawer {
 
     override fun setWorldSize(worldW: Int, worldH: Int) {
         mWorldWidth = worldW
-        mVideoHeight = worldH
+        mWorldHeight = worldH
     }
 
     override fun setAlpha(alpha: Float) {
@@ -199,16 +199,17 @@ class VideoDrawer(context: Context) :IDrawer {
         //替代上面三行代码，效果一样
         mProgram = ShaderHelper.buildProgram(vertexShaderSource, fragmentShaderSource)
         if (mProgram != 0){
+            if (ShaderHelper.validateProgram(mProgram)){
+                //运行openGL程序
+                glUseProgram(mProgram)
+            }
             mVertexMatrixHandler = glGetUniformLocation(mProgram,"uMatrix")
             mVertexPosHandler = glGetAttribLocation(mProgram,"aPosition")
             mTextureHandler = glGetUniformLocation(mProgram,"uTexture")
             mTexturePosHandler = glGetAttribLocation(mProgram,"aCoordinate")
             mAlphaHandler = glGetAttribLocation(mProgram,"alpha")
 
-            if (ShaderHelper.validateProgram(mProgram)){
-                //运行openGL程序
-                glUseProgram(mProgram)
-            }
+
 
         }
     }
@@ -237,7 +238,7 @@ class VideoDrawer(context: Context) :IDrawer {
         //启用顶点的句柄
         glEnableVertexAttribArray(mVertexPosHandler)
         glEnableVertexAttribArray(mTextureHandler)
-        glUniformMatrix4fv(mVertexMatrixHandler,1,false,mMatrix,0)
+        glUniformMatrix4fv(mVertexMatrixHandler, 1, false, mMatrix, 0)
         //设置着色器参数，第二个参数表示一个顶点包含的数据数量，这里为xy，所以为2
         glVertexAttribPointer(mVertexPosHandler,2, GL_FLOAT,false,0,mVertexBuffer)
         glVertexAttribPointer(mTexturePosHandler,2, GL_FLOAT,false,0,mTextureBuffer)
