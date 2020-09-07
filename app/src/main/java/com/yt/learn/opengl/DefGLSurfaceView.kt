@@ -5,6 +5,7 @@ import android.graphics.PointF
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 import android.view.MotionEvent
+import com.yt.learn.opengl.drawer.VideoDrawer
 
 /**
  * @author yt
@@ -20,7 +21,7 @@ class DefGLSurfaceView :GLSurfaceView{
 
     private var mPrePoint = PointF()
 
-    private var mDrawer:VideoDrawer? = null
+    private var mDrawer: VideoDrawer? = null
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         when(event?.action){

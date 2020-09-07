@@ -4,18 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.view.Surface
-import com.yt.learn.R
 import com.yt.learn.media.decoder.AudioDecoder
 import com.yt.learn.media.decoder.VideoDecoder
-import com.yt.learn.opengl.IDrawer
-import com.yt.learn.opengl.VideoDrawer
+import com.yt.learn.opengl.drawer.IDrawer
+import com.yt.learn.opengl.drawer.VideoDrawer
 import com.yt.learn.opengl.egl.SimpleRender
 import kotlinx.android.synthetic.main.activity_opengl_player.*
 import java.util.concurrent.Executors
 
 class OpenGLPlayerActivity : AppCompatActivity() {
 
-    lateinit var drawer:IDrawer
+    lateinit var drawer: IDrawer
     lateinit var videoDecoder: VideoDecoder
     lateinit var audioDecoder: AudioDecoder
     //文件路径

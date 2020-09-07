@@ -1,4 +1,4 @@
-package com.yt.learn.opengl
+package com.yt.learn.opengl.drawer
 
 import android.graphics.SurfaceTexture
 

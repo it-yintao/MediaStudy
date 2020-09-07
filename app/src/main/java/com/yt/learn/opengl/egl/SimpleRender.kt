@@ -2,7 +2,8 @@ package com.yt.learn.opengl.egl
 
 import android.opengl.GLES20.*
 import android.opengl.GLSurfaceView
-import com.yt.learn.opengl.IDrawer
+import com.yt.learn.opengl.OpenGLTools
+import com.yt.learn.opengl.drawer.IDrawer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 

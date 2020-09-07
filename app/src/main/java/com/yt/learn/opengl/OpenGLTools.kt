@@ -1,4 +1,4 @@
-package com.yt.learn.opengl.egl
+package com.yt.learn.opengl
 
 import android.opengl.GLES20.glGenTextures
 

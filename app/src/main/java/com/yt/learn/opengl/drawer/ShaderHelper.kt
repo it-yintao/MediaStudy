@@ -1,4 +1,4 @@
-package com.yt.learn.opengl
+package com.yt.learn.opengl.drawer
 
 import android.content.Context
 import android.content.res.Resources.NotFoundException
@@ -45,14 +45,20 @@ object ShaderHelper {
      * 顶点着色器
      */
     fun compileVertexShader(shaderCode:String):Int{
-        return compileShader(GL_VERTEX_SHADER,shaderCode)
+        return compileShader(
+            GL_VERTEX_SHADER,
+            shaderCode
+        )
     }
 
     /**
      * 片段着色器
      */
     fun compileFragmentShader(shaderCode: String):Int{
-        return compileShader(GL_FRAGMENT_SHADER,shaderCode)
+        return compileShader(
+            GL_FRAGMENT_SHADER,
+            shaderCode
+        )
     }
 
    private fun compileShader(type:Int,shaderCode:String):Int{
@@ -108,9 +114,18 @@ object ShaderHelper {
      * 编译openGL程序
      */
     fun buildProgram(vertexShaderSource:String,fragmentShaderSource: String):Int{
-        val vertexShader = compileVertexShader(vertexShaderSource)
-        val fragmentShader = compileFragmentShader(fragmentShaderSource)
-        return linkProgram(vertexShader,fragmentShader)
+        val vertexShader =
+            compileVertexShader(
+                vertexShaderSource
+            )
+        val fragmentShader =
+            compileFragmentShader(
+                fragmentShaderSource
+            )
+        return linkProgram(
+            vertexShader,
+            fragmentShader
+        )
     }
 
 

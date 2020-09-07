@@ -1,8 +1,7 @@
-package com.yt.learn.opengl
+package com.yt.learn.opengl.drawer
 
 import android.content.Context
 import android.graphics.SurfaceTexture
-import android.opengl.GLES11Ext
 import android.opengl.GLES11Ext.GL_TEXTURE_EXTERNAL_OES
 import android.opengl.GLES20
 import android.opengl.GLES20.*
@@ -18,7 +17,7 @@ import java.nio.FloatBuffer
  * 创建日期 ：2020/9/4
  * 描述：视频渲染器
  */
-class VideoDrawer(context: Context) :IDrawer {
+class VideoDrawer(context: Context) : IDrawer {
 
     private val mContext = context
 
@@ -190,14 +189,25 @@ class VideoDrawer(context: Context) :IDrawer {
     }
 
     private fun createGLPrg(){
-        val vertexShaderSource = ShaderHelper.readTextFileFromResource(mContext, R.raw.texture_vertex_shader)
-        val fragmentShaderSource = ShaderHelper.readTextFileFromResource(mContext,R.raw.texture_fragment_shader)
+        val vertexShaderSource =
+            ShaderHelper.readTextFileFromResource(
+                mContext,
+                R.raw.texture_vertex_shader
+            )
+        val fragmentShaderSource =
+            ShaderHelper.readTextFileFromResource(
+                mContext,
+                R.raw.texture_fragment_shader
+            )
 
 //        val vertexShaderId = ShaderHelper.compileVertexShader(vertexShaderSource)
 //        val fragmentShaderId = ShaderHelper.compileFragmentShader(fragmentShaderSource)
 //        mProgram = ShaderHelper.linkProgram(vertexShaderId = vertexShaderId,fragmentShaderId = fragmentShaderId )
         //替代上面三行代码，效果一样
-        mProgram = ShaderHelper.buildProgram(vertexShaderSource, fragmentShaderSource)
+        mProgram = ShaderHelper.buildProgram(
+            vertexShaderSource,
+            fragmentShaderSource
+        )
         if (mProgram != 0){
             if (ShaderHelper.validateProgram(mProgram)){
                 //运行openGL程序
