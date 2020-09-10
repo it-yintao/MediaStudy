@@ -1,11 +1,8 @@
 package com.yt.learn.media.decoder
 
 import android.media.*
-import android.util.Log
-import com.yt.learn.media.BaseDecoder
-import com.yt.learn.media.IExtractor
 import com.yt.learn.media.extractor.AudioExtractor
-import java.lang.Exception
+import com.yt.learn.media.extractor.IExtractor
 import java.nio.ByteBuffer
 
 /**
@@ -14,7 +11,7 @@ import java.nio.ByteBuffer
  * 创建日期 ：2020/9/3
  * 描述：音频解码器
  */
-class AudioDecoder(path:String):BaseDecoder(path) {
+class AudioDecoder(path:String): BaseDecoder(path) {
     private val TAG = AudioDecoder::class.simpleName
 
     /*采样率*/

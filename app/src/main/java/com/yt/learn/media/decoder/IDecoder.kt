@@ -1,4 +1,4 @@
-package com.yt.learn.media
+package com.yt.learn.media.decoder
 
 import android.media.MediaFormat
 

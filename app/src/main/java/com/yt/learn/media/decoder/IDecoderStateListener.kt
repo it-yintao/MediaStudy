@@ -1,4 +1,6 @@
-package com.yt.learn.media
+package com.yt.learn.media.decoder
+
+import com.yt.learn.media.Frame
 
 /**
  * @author yt
@@ -7,12 +9,12 @@ package com.yt.learn.media
  * 描述：解码状态回调接口
  */
 interface IDecoderStateListener {
-    fun decoderPrepare(decodeJob:BaseDecoder?)
+    fun decoderPrepare(decodeJob: BaseDecoder?)
     fun decoderReady(decodeJob: BaseDecoder?)
     fun decoderRunning(decodeJob: BaseDecoder?)
     fun decoderPause(decodeJob: BaseDecoder?)
     fun decodeOneFrame(decodeJob: BaseDecoder?, frame: Frame)
     fun decoderFinish(decodeJob: BaseDecoder?)
     fun decoderDestroy(decodeJob: BaseDecoder?)
-    fun decoderError(decodeJob: BaseDecoder?,msg:String?)
+    fun decoderError(decodeJob: BaseDecoder?, msg:String?)
 }

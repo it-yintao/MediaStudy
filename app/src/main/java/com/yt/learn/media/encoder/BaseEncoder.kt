@@ -135,7 +135,36 @@ abstract class BaseEncoder(muxer:MMuxer,width:Int = -1,height:Int = -1):Runnable
      */
     private fun drain(){
         loop@ while (!mIsEOS){
+            val index = mCodec.dequeueOutputBuffer(mBufferInfo,1000)
+            when(index){
+                MediaCodec.INFO_TRY_AGAIN_LATER ->break@loop
+                MediaCodec.INFO_OUTPUT_FORMAT_CHANGED ->{
+                    addTrack(mMuxer,mCodec.outputFormat)
+                }
+                MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED ->{
+                    mOutputBuffers = mCodec.outputBuffers
+                }
+                else ->{
+                    if (mBufferInfo.flags == MediaCodec.BUFFER_FLAG_END_OF_STREAM){
+                        mIsEOS = true;
+                        mBufferInfo.set(0,0,0,mBufferInfo.flags)
+                        Log.e(TAG,"编码结束")
+                    }
 
+                    if (mBufferInfo.flags == MediaCodec.BUFFER_FLAG_CODEC_CONFIG){
+                        mCodec.releaseOutputBuffer(index,false)
+                        continue@loop
+                    }
+
+                    if (!mIsEOS){
+                        mOutputBuffers?.let {
+                            writeData(mMuxer,it[index],mBufferInfo)
+                        }
+
+                    }
+                    mCodec.releaseOutputBuffer(index,false)
+                }
+            }
         }
     }
 
@@ -143,35 +172,66 @@ abstract class BaseEncoder(muxer:MMuxer,width:Int = -1,height:Int = -1):Runnable
      * 编码结束，释放资源
      */
     private fun done(){
-
+        try {
+            Log.i(TAG,"release")
+            release(mMuxer)
+            mCodec.stop()
+            mCodec.release()
+            mRunning = false
+            mStateListener?.encoderFinish(this)
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
     /**
      * 编码进入等待
      */
     private fun justWait(){
-
+        try {
+            synchronized(mLock){
+                mLock.wait(1000)
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
     /**
      * 通知继续编码
      */
     private fun notifyGo(){
-
+        try {
+            synchronized(mLock){
+                mLock.notify()
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
     /**
      * 将一帧数据压入队列，等待编码
      */
     fun encodeOneFrame(frame: Frame){
-
+        synchronized(mFrames){
+            mFrames.add(frame)
+        }
+        notifyGo()
+        //延时一点时间，避免掉帧
+        Thread.sleep(frameWaitTimeMs())
     }
 
     /**
      * 通知结束编码
      */
     fun endOfStream(){
-
+        synchronized(mFrames){
+            val frame = Frame()
+            frame.buffer = null
+            mFrames.add(frame)
+            notifyGo()
+        }
     }
 
     /**

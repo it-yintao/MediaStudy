@@ -5,8 +5,7 @@ import android.media.MediaFormat
 import android.util.Log
 import android.view.Surface
 import android.view.SurfaceView
-import com.yt.learn.media.BaseDecoder
-import com.yt.learn.media.IExtractor
+import com.yt.learn.media.extractor.IExtractor
 import com.yt.learn.media.extractor.VideoExtractor
 import java.nio.ByteBuffer
 
@@ -16,7 +15,8 @@ import java.nio.ByteBuffer
  * 创建日期 ：2020/9/3
  * 描述：视频解码器
  */
-class VideoDecoder(path:String,sfv:SurfaceView?,surface:Surface?):BaseDecoder(path) {
+class VideoDecoder(path:String,sfv:SurfaceView?,surface:Surface?):
+    BaseDecoder(path) {
 
     private val TAG = VideoDecoder::class.simpleName
 

@@ -1,7 +1,6 @@
 package com.yt.learn.media.extractor
 
 import android.media.MediaFormat
-import com.yt.learn.media.IExtractor
 import java.nio.ByteBuffer
 
 /**
@@ -10,7 +9,7 @@ import java.nio.ByteBuffer
  * 创建日期 ：2020/9/3
  * 描述：视频数据读取器
  */
-class VideoExtractor(path:String): IExtractor{
+class VideoExtractor(path:String): IExtractor {
 
     private val mMediaExtractor = MMExtractor(path)
 

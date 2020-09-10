@@ -1,8 +1,10 @@
-package com.yt.learn.media
+package com.yt.learn.media.decoder
 
 import android.media.MediaCodec
 import android.media.MediaFormat
 import android.util.Log
+import com.yt.learn.media.*
+import com.yt.learn.media.extractor.IExtractor
 import java.io.File
 import java.lang.Exception
 import java.nio.ByteBuffer
@@ -14,7 +16,8 @@ import java.nio.ByteBuffer
  * 创建日期 ：2020/9/3
  * 描述：解码器基类
  */
-abstract class BaseDecoder(private val mFilePath:String): IDecoder {
+abstract class BaseDecoder(private val mFilePath:String):
+    IDecoder {
     private val TAG = BaseDecoder::class.simpleName
 
     //-------------------线程相关-------------------
@@ -44,7 +47,7 @@ abstract class BaseDecoder(private val mFilePath:String): IDecoder {
     /**
      * 音视频数据读取器
      */
-    private var mExtractor:IExtractor? = null
+    private var mExtractor: IExtractor? = null
 
     /**
      * 解码输入缓存区
@@ -63,7 +66,7 @@ abstract class BaseDecoder(private val mFilePath:String): IDecoder {
 
     private var mState = DecodeState.STOP
 
-    protected var mStateListener:IDecoderStateListener? = null
+    protected var mStateListener: IDecoderStateListener? = null
 
     /**
      * 流数据是否结束
@@ -105,7 +108,8 @@ abstract class BaseDecoder(private val mFilePath:String): IDecoder {
             while (mIsRunning){
                 if (mState != DecodeState.START &&
                         mState != DecodeState.DECODING &&
-                        mState != DecodeState.SEEKING){
+                        mState != DecodeState.SEEKING
+                ){
                     Log.i(TAG,"进入等待：$mState")
 
                     waitDecode()
@@ -429,7 +433,7 @@ abstract class BaseDecoder(private val mFilePath:String): IDecoder {
     /**
      * 初始化数据提取器
      */
-    abstract fun initExtractor(path:String):IExtractor
+    abstract fun initExtractor(path:String): IExtractor
 
     /**
      * 初始化子类自己特有的参数

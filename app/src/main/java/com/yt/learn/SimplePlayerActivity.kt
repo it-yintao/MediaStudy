@@ -3,7 +3,6 @@ package com.yt.learn
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import com.yt.learn.media.BaseDecoder
 import com.yt.learn.media.decoder.AudioDecoder
 import com.yt.learn.media.decoder.VideoDecoder
 import kotlinx.android.synthetic.main.activity_simple_player.*
