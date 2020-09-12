@@ -28,7 +28,6 @@ class AudioCapture {
     fun setAudioFrameCapturedListener(listener: OnAudioFrameCapturedListener){
         mAudioFrameCapturedListener = listener
     }
-
     fun startCapture(audioSource:Int = DEFAULT_SOURCE,sampleRateInHZ:Int= DEFAULT_SAMPLE_RATE,
     channelConfig:Int = DEFAULT_CHANNEL_CONFIG,audioFormat:Int = DEFAULT_AUDIO_FORMAT ):Boolean{
         if (mIsCaptureStarted){
@@ -59,6 +58,7 @@ class AudioCapture {
 
     }
 
+    @Synchronized
     fun stopCapture(){
         if (!mIsCaptureStarted){
             return
@@ -91,7 +91,7 @@ class AudioCapture {
                         Log.e(TAG,"error ERROR_BAD_VALUE")
                     }
                     else ->{
-                        mAudioFrameCapturedListener?.onAudioFrameCapture(buffer);
+                        mAudioFrameCapturedListener?.onAudioFrameCapture(buffer)
                         Log.d(TAG,"OK,captured $ret bytes")
                     }
                 }

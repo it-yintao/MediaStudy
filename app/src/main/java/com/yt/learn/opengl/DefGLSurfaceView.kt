@@ -2,6 +2,7 @@ package com.yt.learn.opengl
 
 import android.content.Context
 import android.graphics.PointF
+import android.graphics.SurfaceTexture
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 import android.view.MotionEvent

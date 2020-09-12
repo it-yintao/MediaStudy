@@ -135,8 +135,7 @@ abstract class BaseEncoder(muxer:MMuxer,width:Int = -1,height:Int = -1):Runnable
      */
     private fun drain(){
         loop@ while (!mIsEOS){
-            val index = mCodec.dequeueOutputBuffer(mBufferInfo,1000)
-            when(index){
+            when(val index = mCodec.dequeueOutputBuffer(mBufferInfo,1000)){
                 MediaCodec.INFO_TRY_AGAIN_LATER ->break@loop
                 MediaCodec.INFO_OUTPUT_FORMAT_CHANGED ->{
                     addTrack(mMuxer,mCodec.outputFormat)

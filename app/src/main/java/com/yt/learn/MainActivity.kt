@@ -15,10 +15,12 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         setContentView(R.layout.activity_main)
         bt_simple_player.setOnClickListener(this)
         bt_opengl_player.setOnClickListener(this)
+        bt_record.setOnClickListener(this)
         //请求权限
         val perms = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.RECORD_AUDIO )
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.CAMERA)
         if(!EasyPermissions.hasPermissions(this,*perms)){
             EasyPermissions.requestPermissions(this,"需要读写手机SD卡权限、音频录制权限",1000,*perms)
         }
@@ -33,6 +35,10 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
             R.id.bt_opengl_player ->{
                 startActivity(Intent(this,
                     OpenGLPlayerActivity::class.java))
+            }
+            R.id.bt_record ->{
+                startActivity(Intent(this,
+                RecordActivity::class.java))
             }
         }
     }
